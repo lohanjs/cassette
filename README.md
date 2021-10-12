@@ -13,6 +13,7 @@
 
 ## Commands
 ```
+Prefix: !
 Music:
   leave   Stops music, clears queue and leaves
   now     Shows current song
