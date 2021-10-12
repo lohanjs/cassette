@@ -10,3 +10,22 @@
 - py-cord
 - pynacl
 - pytube
+
+## Commands
+```
+Music:
+  leave   Stops music, clears queue and leaves
+  now     Shows current song
+  pause   Pauses music
+  play    Searches or plays link
+  queue   Shows queue
+  remove  Removes song from queue at selected index
+  resume  Resumes music
+  shuffle Shuffles queue until disabled
+  skip    Skips current song
+  skipto  Skips to selected index in queue
+  stop    Stops music and clears queue
+No Category:
+  help    Shows this message
+  ping    Shows bot latency
+```
