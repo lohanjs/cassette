@@ -12,7 +12,7 @@
 - pytube
 
 ## Setup
-Intented to be hosted on Heroku.
+Intended to be hosted on Heroku.
 - Fork or clone this repo.
 - Create a Discord bot and Heroku application.
 - Create a Config Var on Heroku called "TOKEN" with your created bot's token as the value.
