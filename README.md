@@ -33,6 +33,7 @@ Music:
   skip    Skips current song
   skipto  Skips to selected index in queue
   stop    Stops music and clears queue
+  stream  Streams audio from live stream URL
 No Category:
   help    Shows this message
   ping    Shows bot latency
