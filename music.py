@@ -107,7 +107,20 @@ class Music(commands.Cog):
                     await self.play_music(ctx)
             if self.shuffled == True:
                 shuffle(self.music_queue)
-
+    
+    @commands.command(name = "stream", help = "Streams audio from live stream URL")
+    async def stream(self, ctx, url):
+        voice_channel = ctx.author.voice.channel
+        if voice_channel is None:
+            await ctx.send("Connect to a Voice Channel")
+        else:
+            await ctx.send(f"{url} Added to the Queue")
+            self.music_queue.append([url, url, voice_channel])
+            if self.is_playing == False:
+                await self.play_music(ctx)
+        if self.shuffled == True:
+                shuffle(self.music_queue)
+    
     @commands.command(name = "shuffle", help = "Shuffles queue until disabled")
     async def shuffle(self, ctx):
         if self.shuffled == False:
