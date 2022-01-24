@@ -81,7 +81,7 @@ class Music(commands.Cog):
                     yttitle = ytobject.title
                     self.music_queue.append([ytsource, yttitle, voice_channel])
                     await message.edit(content = f"{fyttitle} Added to the Queue, Added {i+1}/{len(playlist.video_urls)}")
-            elif "youtube.com/watch" in query:
+            elif ("youtube.com/watch" in query) or ("youtu.be/" in query) or ("youtube.com/shorts" in query):
                 ytobject = YouTube(query)
                 ytsource = ytobject.streams.get_audio_only().url
                 yttitle = ytobject.title
@@ -206,7 +206,7 @@ class Music(commands.Cog):
             await ctx.send("Leaving Voice Channel")
             await self.vc.disconnect(force=True)
 
-bot = commands.Bot(command_prefix = "!")
+bot = commands.Bot(command_prefix = "!", case_insensitive=True)
 bot.add_cog(Music(bot))
 
 @bot.command(name = "ping", help = "Shows bot latency")
