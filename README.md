@@ -12,6 +12,18 @@
 - pytube
 - FFmpeg
 
+## Build for Docker
+First, clone the repo and move your working directory into it
+```
+https://github.com/lohanjs/cassette.git
+cd cassette
+```
+Then build and run with docker
+```
+docker build -t {IMAGE NAME}
+docker run -e TOKEN={YOUR DISCORD TOKEN} -d {IMAGE NAME FROM ABOVE}
+```
+
 ## Commands
 ```
 Prefix: !
