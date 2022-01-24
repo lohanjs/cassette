@@ -1,3 +1,3 @@
 py-cord
 pynacl
-pytube
+git+https://github.com/lalkalol1907/pytube.git

@@ -8,4 +8,6 @@ ENV TOKEN $TOKEN
 
 COPY requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
+RUN apt-get -y update
+RUN apt-get install -y ffmpeg
 CMD ["python3", "/music.py"]

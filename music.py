@@ -82,7 +82,7 @@ class Music(commands.Cog):
                     self.music_queue.append([ytsource, yttitle, voice_channel])
                     await message.edit(content = f"{fyttitle} Added to the Queue, Added {i+1}/{len(playlist.video_urls)}")
             elif ("youtube.com/watch" in query) or ("youtu.be/" in query) or ("youtube.com/shorts" in query):
-                ytobject = YouTube(query)
+                ytobject = YouTube(str(query))
                 ytsource = ytobject.streams.get_audio_only().url
                 yttitle = ytobject.title
                 await ctx.send(f"{yttitle} Added to the Queue")
