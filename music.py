@@ -67,42 +67,42 @@ class Music(commands.Cog):
             if "youtube.com/playlist" in query:
                 playlist = Playlist(query)
                 furl = playlist.video_urls[0]
-                fytobject = YouTube(furl)
-                fytsource = fytobject.streams.get_audio_only().url
-                fyttitle = fytobject.title
-                self.music_queue.append([fytsource, fyttitle, voice_channel]) 
-                message = await ctx.send(f"{fyttitle} Added to the Queue, Added 1/{len(playlist.video_urls)}")
+                fytObject = YouTube(furl)
+                fytSource = fytObject.streams.get_audio_only().url
+                fytTitle = fytObject.title
+                self.music_queue.append([fytSource, fytTitle, voice_channel]) 
+                message = await ctx.send(f"{fytTitle} Added to the Queue, Added 1/{len(playlist.video_urls)}")
                 if not self.is_playing:
                     await self.play_music(ctx)
                 for i in range(1, len(playlist.video_urls)):
                     url = playlist.video_urls[i]
-                    ytobject = YouTube(url)
-                    ytsource = ytobject.streams.get_audio_only().url
-                    yttitle = ytobject.title
-                    self.music_queue.append([ytsource, yttitle, voice_channel])
-                    await message.edit(content = f"{fyttitle} Added to the Queue, Added {i+1}/{len(playlist.video_urls)}")
+                    ytObject = YouTube(url)
+                    ytSource = ytObject.streams.get_audio_only().url
+                    ytTitle = ytObject.title
+                    self.music_queue.append([ytSource, ytTitle, voice_channel])
+                    await message.edit(content = f"{fytTitle} Added to the Queue, Added {i+1}/{len(playlist.video_urls)}")
             elif ("youtube.com/watch" in query) or ("youtu.be/" in query) or ("youtube.com/shorts" in query):
-                ytobject = YouTube(str(query))
-                ytsource = ytobject.streams.get_audio_only().url
-                yttitle = ytobject.title
-                await ctx.send(f"{yttitle} Added to the Queue")
-                self.music_queue.append([ytsource, yttitle, voice_channel])
+                ytObject = YouTube(str(query))
+                ytSource = ytObject.streams.get_audio_only().url
+                ytTitle = ytObject.title
+                await ctx.send(f"{ytTitle} Added to the Queue")
+                self.music_queue.append([ytSource, ytTitle, voice_channel])
                 if not self.is_playing:
                     await self.play_music(ctx)
             else:
-                searchobject = Search(query)
-                searchresults = ""
+                searchObject = Search(query)
+                searchResults = ""
                 for i in range(0, 10):
-                    searchresults += f"{i+1}  -  {searchobject.results[i].title}\n"
-                message = await ctx.send(searchresults)
+                    searchResults += f"{i+1}  -  {searchObject.results[i].title}\n"
+                message = await ctx.send(searchResults)
                 def check(reply):
-                    return reply.content.startswith("!") and reply.author == ctx.author and reply.channel == ctx.channel
-                rchoice = await bot.wait_for("message", check = check, timeout = 15)
-                choice = int(rchoice.content[1:])
-                ytsource = searchobject.results[choice-1].streams.get_audio_only().url
-                yttitle = searchobject.results[choice-1].title
-                self.music_queue.append([ytsource, yttitle, voice_channel])
-                await message.edit(content = f"{yttitle} Added to the Queue")
+                    return reply.content.startsWith("!") and reply.author == ctx.author and reply.channel == ctx.channel
+                rChoice = await bot.wait_for("message", check = check, timeout = 15)
+                choice = int(rChoice.content[1:])
+                ytSource = searchObject.results[choice-1].streams.get_audio_only().url
+                ytTitle = searchObject.results[choice-1].title
+                self.music_queue.append([ytSource, ytTitle, voice_channel])
+                await message.edit(content = f"{ytTitle} Added to the Queue")
                 if not self.is_playing:
                     await self.play_music(ctx)
             if self.shuffled:
@@ -140,11 +140,11 @@ class Music(commands.Cog):
     
     @commands.command(name = "queue", help = "Shows queue")
     async def queue(self, ctx):
-        retval = ""
+        retVal = ""
         for i in range(0, len(self.music_queue)):
-            retval += f"{i+1}  -  {self.music_queue[i][1]}\n"
-        if retval != "":
-            await ctx.send(f"Now Playing: {self.now_playing}\n{retval}")
+            retVal += f"{i+1}  -  {self.music_queue[i][1]}\n"
+        if retVal != "":
+            await ctx.send(f"Now Playing: {self.now_playing}\n{retVal}")
         else:
             if self.is_playing:
                 await ctx.send(f"Now Playing: {self.now_playing}\nQueue Empty")
