@@ -46,7 +46,7 @@ class Music(commands.Cog):
         if len(self.music_queue) > 0:
             self.is_playing = True
             source = self.music_queue[0][0]
-            if self.vc == "" or not self.vc.is_connected() or self.vc == None:
+            if self.vc == "" or not self.vc.is_connected() or self.vc is None:
                 self.vc = await self.music_queue[0][2].connect()
             else:
                 await self.vc.move_to(self.music_queue[0][2])
@@ -72,7 +72,7 @@ class Music(commands.Cog):
                 fyttitle = fytobject.title
                 self.music_queue.append([fytsource, fyttitle, voice_channel]) 
                 message = await ctx.send(f"{fyttitle} Added to the Queue, Added 1/{len(playlist.video_urls)}")
-                if self.is_playing == False:
+                if not self.is_playing:
                     await self.play_music(ctx)
                 for i in range(1, len(playlist.video_urls)):
                     url = playlist.video_urls[i]
@@ -87,7 +87,7 @@ class Music(commands.Cog):
                 yttitle = ytobject.title
                 await ctx.send(f"{yttitle} Added to the Queue")
                 self.music_queue.append([ytsource, yttitle, voice_channel])
-                if self.is_playing == False:
+                if not self.is_playing:
                     await self.play_music(ctx)
             else:
                 searchobject = Search(query)
@@ -103,9 +103,9 @@ class Music(commands.Cog):
                 yttitle = searchobject.results[choice-1].title
                 self.music_queue.append([ytsource, yttitle, voice_channel])
                 await message.edit(content = f"{yttitle} Added to the Queue")
-                if self.is_playing == False:
+                if not self.is_playing:
                     await self.play_music(ctx)
-            if self.shuffled == True:
+            if self.shuffled:
                 shuffle(self.music_queue)
     
     @commands.command(name = "stream", help = "Streams audio from live stream URL")
@@ -116,14 +116,14 @@ class Music(commands.Cog):
         else:
             await ctx.send(f"{url} Added to the Queue")
             self.music_queue.append([url, url, voice_channel])
-            if self.is_playing == False:
+            if not self.is_playing:
                 await self.play_music(ctx)
-        if self.shuffled == True:
+        if self.shuffled:
                 shuffle(self.music_queue)
     
     @commands.command(name = "shuffle", help = "Shuffles queue until disabled")
     async def shuffle(self, ctx):
-        if self.shuffled == False:
+        if not self.shuffled:
             shuffle(self.music_queue)
             self.shuffled = True
             await ctx.send("Shuffle Enabled")
@@ -133,7 +133,7 @@ class Music(commands.Cog):
 
     @commands.command(name = "now", help = "Shows current song")
     async def now(self, ctx):
-        if self.is_playing == False:
+        if not self.is_playing:
             await ctx.send(f"Not Playing")
         else:
             await ctx.send(f"Now Playing: {self.now_playing}")
@@ -146,9 +146,9 @@ class Music(commands.Cog):
         if retval != "":
             await ctx.send(f"Now Playing: {self.now_playing}\n{retval}")
         else:
-            if self.is_playing == True:
+            if self.is_playing:
                 await ctx.send(f"Now Playing: {self.now_playing}\nQueue Empty")
-            elif self.is_playing == False:
+            elif not self.is_playing:
                 await ctx.send("Not Playing and Queue Empty")
 
     @commands.command(name = "skip", help = "Skips current song")
