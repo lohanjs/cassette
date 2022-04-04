@@ -7,10 +7,10 @@
 <p align="center">A self-hosted Discord music bot.</p>
 
 ## Requirements
-- py-cord
+- "discord.py[voice]"
+- FFmpeg
 - pynacl
 - pytube
-- FFmpeg
 
 ## Commands
 ```
