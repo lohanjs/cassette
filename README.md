@@ -7,7 +7,7 @@
 <p align="center">A self-hosted Discord music bot.</p>
 
 ## Requirements
-- "discord.py[voice]"
+- discord.py[voice]
 - FFmpeg
 - pynacl
 - pytube
